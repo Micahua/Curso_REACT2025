@@ -1,0 +1,89 @@
+/* Grupos de formulario */
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  color: #0b0a0a; /* Marrón suave */
+  margin-bottom: 5px;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #0b0503; /* Marrón claro */
+  background-color: #fdfdfb;
+  box-sizing: border-box;
+  color: #3d2f25;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #a8d5ba; /* Verde suave */
+  outline: none;
+  background-color: #f0fff5;
+}
+
+/* Botones */
+.btn-submit,
+.volver-btn {
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: 6px;
+  border: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  padding: 12px 24px;
+  height: 50px;
+  align-items: center;
+  align-content: center;
+}
+
+/* Contenedor de botones */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Estilo específico de los botones */
+.btn-submit {
+  background-color: #8cbf9f; /* Verde suave */
+  color: #fff;
+  text-align: center;
+}
+
+.volver-btn {
+  background-color: #845f3b; /* Marrón suave */
+  color: #fff;
+  text-align: center;
+}
+
+.btn-submit:hover {
+  background-color: #1e502e; /* Verde más intenso */
+}
+
+.volver-btn:hover {
+  background-color: #5a320d; /* Marrón más intenso */
+}
+
+button:disabled {
+  cursor: not-allowed;
+  background-color: #cfcfcf;
+}
+
+/* Mensaje de carga o error */
+.form-message {
+  color: #c0392b;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+  text-align: center;
+}

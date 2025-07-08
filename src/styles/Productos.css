@@ -1,0 +1,36 @@
+.productos-conteiner {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 400px;
+  width: 100%;
+}
+
+.producto-card {
+  background-color: bisque;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 30%;
+  height: 100%;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.producto-image {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+}
+
+.btn-brown-green {
+  background-color: #6f4f2f; /* Marrón */
+  border-color: #6f4f2f;
+  color: white;
+}
+
+.btn-brown-green:hover {
+  background-color: #4e3b26; /* Tono más oscuro de marrón verdoso para el hover */
+  border-color: #4e3b26;
+}
