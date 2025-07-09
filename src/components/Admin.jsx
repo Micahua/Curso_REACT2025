@@ -16,7 +16,7 @@ export default function Admin() {
 
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevenir el comportamiento por defecto del submit
-    alert("Sección no terminada");
+    alert("Sección en construcción");
   };
 
   return (

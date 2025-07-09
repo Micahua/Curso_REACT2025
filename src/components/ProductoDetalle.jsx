@@ -6,21 +6,17 @@ import { CarritoContext } from "../contexts/CarritoContext";
 import { useAuthContext } from "../contexts/AuthContext";
 import { useProductosContext } from "../contexts/ProductosContext";
 
-function ProductoDetalle({}) {
+function ProductoDetalle() {
   const navegar = useNavigate();
-
   const { admin } = useAuthContext();
   const { agregarAlCarrito } = useContext(CarritoContext);
   const { productoEncontrado, obtenerProducto, eliminarProducto } =
     useProductosContext();
 
   const { id } = useParams();
-  //const [producto, setProducto] = useState(null);
   const [cantidad, setCantidad] = useState(1);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
-
-  console.log(id);
 
   useEffect(() => {
     obtenerProducto(id)
@@ -28,17 +24,16 @@ function ProductoDetalle({}) {
         setCargando(false);
       })
       .catch((error) => {
-        if (error == "Producto no encontrado") {
+        if (error === "Producto no encontrado") {
           setError("Producto no encontrado");
-        }
-        if (error == "Hubo un error al obtener el producto.") {
+        } else if (error === "Hubo un error al obtener el producto.") {
           setError("Hubo un error al obtener el producto.");
         }
         setCargando(false);
       });
   }, [id]);
 
-  function funcionCarrito() {
+  const funcionCarrito = () => {
     if (cantidad < 1) return;
     dispararSweetBasico(
       "Producto Agregado",
@@ -47,30 +42,34 @@ function ProductoDetalle({}) {
       "Cerrar"
     );
     agregarAlCarrito({ ...productoEncontrado, cantidad });
-  }
+  };
 
-  function dispararEliminar() {
+  const dispararEliminar = () => {
     eliminarProducto(id)
       .then(() => {
         navegar("/productos");
+        dispararSweetBasico(
+          "Producto eliminado correctamente",
+          "El producto fue eliminado con éxito",
+          "success",
+          "Cerrar"
+        );
       })
       .catch((error) => {
         dispararSweetBasico(
-          "Hubo un problema al agregar el producto",
+          "Hubo un problema al eliminar el producto",
           error,
           "error",
           "Cerrar"
         );
       });
-  }
+  };
 
-  function sumarContador() {
-    setCantidad(cantidad + 1);
-  }
+  const sumarContador = () => setCantidad(cantidad + 1);
 
-  function restarContador() {
+  const restarContador = () => {
     if (cantidad > 1) setCantidad(cantidad - 1);
-  }
+  };
 
   if (cargando) return <p>Cargando producto...</p>;
   if (error) return <p>{error}</p>;
@@ -84,27 +83,38 @@ function ProductoDetalle({}) {
         alt={productoEncontrado.name}
       />
       <div className="detalle-info">
+        {/* Botón Volver */}
+        <button className="btn-volver" onClick={() => navegar(-1)}>
+          🔙 Volver
+        </button>
+
         <h2>{productoEncontrado.name}</h2>
         <p>{productoEncontrado.description}</p>
         <p>{productoEncontrado.price} $</p>
+
+        {/* Contador de cantidad */}
         <div className="detalle-contador">
           <button onClick={restarContador}>-</button>
           <span>{cantidad}</span>
           <button onClick={sumarContador}>+</button>
         </div>
+
+        {/* Acciones basadas en el rol de administrador */}
         {admin ? (
-          <Link to={"/admin/editarProducto/" + id}>
-            <button>Editar producto</button>
+          <Link to={`/admin/editarProducto/${id}`}>
+            <button className="btn-editar">Editar producto</button>
           </Link>
         ) : (
-          <button onClick={funcionCarrito}>Agregar al carrito</button>
+          <button onClick={funcionCarrito} className="btn-agregar">
+            Agregar al carrito
+          </button>
         )}
-        {admin && <button onClick={dispararEliminar}>Eliminar Producto</button>}
 
-        {/* 🔙 BOTÓN VOLVER AQUÍ */}
-        <button className="btn-volver" onClick={() => navegar(-1)}>
-          🔙 Volver
-        </button>
+        {admin && (
+          <button onClick={dispararEliminar} className="btn-eliminar">
+            Eliminar Producto
+          </button>
+        )}
       </div>
     </div>
   );

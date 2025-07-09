@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { dispararSweetBasico } from "../assets/SweetAlert";
 import { useAuthContext } from "../contexts/AuthContext";
 import { useProductosContext } from "../contexts/ProductosContext";
-import "../styles/FormularioProducto.css";
+import { Card, Container, Form, Button } from "react-bootstrap"; // Usando componentes de Bootstrap
+import "../styles/FormularioProducto.css"; // Para los estilos adicionales
 
 function FormularioProductoFirebase() {
   const { agregarProductoFirebase } = useProductosContext();
@@ -71,83 +72,98 @@ function FormularioProductoFirebase() {
   };
 
   return (
-    <div className="form-container">
-      <h2>Agregar Producto</h2>
+    <Container className="form-container my-4 d-flex justify-content-center">
+      <Card
+        className="card-form p-4"
+        style={{ width: "100%", maxWidth: "500px" }}
+      >
+        {/* Botón Volver a Productos */}
+        <Button
+          variant="outline-secondary"
+          onClick={() => navegar("/productos")}
+          className="btn-volver mb-3 w-100"
+        >
+          🔙 Volver a Productos
+        </Button>
 
-      {/* Mensaje de error */}
-      <div className="form-message">{loading && <p>Cargando...</p>}</div>
+        <h4 className="text-center mb-4">Agregar Producto</h4>
 
-      <form className="formulario-producto" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="name">Nombre</label>
-          <input
-            id="name"
-            type="text"
-            name="name"
-            placeholder="Ej: Zapatillas"
-            value={producto.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        {/* Mensaje de error */}
+        <div className="form-message">{loading && <p>Cargando...</p>}</div>
 
-        <div className="form-group">
-          <label htmlFor="imagen">URL de la Imagen</label>
-          <input
-            id="imagen"
-            type="text"
-            name="imagen"
-            placeholder="https://..."
-            value={producto.imagen}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        <Form onSubmit={handleSubmit}>
+          {/* Nombre del producto */}
+          <Form.Group className="mb-3">
+            <Form.Label htmlFor="name">Nombre</Form.Label>
+            <Form.Control
+              id="name"
+              type="text"
+              name="name"
+              placeholder="Ej: Zapatillas"
+              value={producto.name}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
 
-        <div className="form-group">
-          <label htmlFor="price">Precio</label>
-          <input
-            id="price"
-            type="number"
-            name="price"
-            placeholder="Ej: 199.99"
-            value={producto.price}
-            onChange={handleChange}
-            required
-            min="0"
-          />
-        </div>
+          {/* URL de la imagen */}
+          <Form.Group className="mb-3">
+            <Form.Label htmlFor="imagen">URL de la Imagen</Form.Label>
+            <Form.Control
+              id="imagen"
+              type="text"
+              name="imagen"
+              placeholder="https://..."
+              value={producto.imagen}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
 
-        <div className="form-group">
-          <label htmlFor="description">Descripción</label>
-          <textarea
-            id="description"
-            name="description"
-            placeholder="Describe el producto"
-            value={producto.description}
-            onChange={handleChange}
-            rows={4}
-            required
-          />
-        </div>
+          {/* Precio */}
+          <Form.Group className="mb-3">
+            <Form.Label htmlFor="price">Precio</Form.Label>
+            <Form.Control
+              id="price"
+              type="number"
+              name="price"
+              placeholder="Ej: 199.99"
+              value={producto.price}
+              onChange={handleChange}
+              required
+              min="0"
+            />
+          </Form.Group>
 
-        {/* Contenedor de botones */}
-        <div className="button-container">
-          {/* Botón Volver */}
-          <button
-            className="volver-btn"
-            onClick={() => navegar("/productos")} // Navega hacia productos
-          >
-            🔙 Volver a Productos
-          </button>
+          {/* Descripción */}
+          <Form.Group className="mb-3">
+            <Form.Label htmlFor="description">Descripción</Form.Label>
+            <Form.Control
+              id="description"
+              as="textarea"
+              name="description"
+              placeholder="Describe el producto"
+              value={producto.description}
+              onChange={handleChange}
+              rows={4}
+              required
+            />
+          </Form.Group>
 
-          {/* Botón Agregar Producto */}
-          <button type="submit" disabled={loading} className="btn-submit">
-            {loading ? "Cargando..." : "Agregar Producto"}
-          </button>
-        </div>
-      </form>
-    </div>
+          {/* Botones de acción */}
+          <div className="d-flex justify-content-between flex-column flex-sm-row gap-3">
+            <Button
+              type="submit"
+              variant="success"
+              disabled={loading}
+              className="btn-submit w-100"
+            >
+              {loading ? "Cargando..." : "Agregar Producto"}
+            </Button>
+          </div>
+        </Form>
+      </Card>
+    </Container>
   );
 }
 

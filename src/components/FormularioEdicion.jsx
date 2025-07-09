@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useParams, useNavigate } from "react-router-dom";
 import { useProductosContext } from "../contexts/ProductosContext";
 import { useAuthContext } from "../contexts/AuthContext";
 import Swal from "sweetalert2";
-import "../styles/FormularioEdicion.css";
+import { Card, Container, Form, Button } from "react-bootstrap"; // Card, Form, Button de Bootstrap
+import "../styles/FormularioEdicion.css"; // Mantenemos los estilos adicionales
 
 function FormularioEdicion() {
   const { admin } = useAuthContext();
@@ -13,6 +14,7 @@ function FormularioEdicion() {
   const [producto, setProducto] = useState(productoEncontrado);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
+  const navegar = useNavigate();
 
   if (!admin) {
     return <Navigate to="/" replace />;
@@ -83,84 +85,101 @@ function FormularioEdicion() {
       });
     }
   };
+
   return (
-    <div className="form-container">
-      <h2>Editar Producto</h2>
+    <Container className="form-container my-4 d-flex justify-content-center">
+      <Card
+        className="card-form p-4"
+        style={{ width: "100%", maxWidth: "500px" }}
+      >
+        {/* Botón "Volver" por encima del título */}
+        <Button
+          variant="outline-secondary"
+          onClick={() => navegar("/productos")}
+          className="btn-volver mb-3 w-100"
+        >
+          🔙 Volver a Productos
+        </Button>
 
-      {/* Mensaje de error si el producto no se encuentra */}
-      {error && <div className="error-message">{error}</div>}
+        <h4 className="text-center mb-4">Editar Producto</h4>
 
-      {/* Verifica que el producto esté cargado antes de mostrar el formulario */}
-      {cargando ? (
-        <div>Cargando...</div>
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="name">Nombre:</label>
-            <input
-              id="name"
-              type="text"
-              name="name"
-              value={producto.name || ""}
-              onChange={handleChange}
-              required
-              placeholder="Ej: Camiseta"
-            />
-          </div>
+        {/* Mensaje de error si el producto no se encuentra */}
+        {error && <div className="error-message mb-3">{error}</div>}
 
-          <div className="form-group">
-            <label htmlFor="imagen">URL de la Imagen:</label>
-            <input
-              id="imagen"
-              type="text"
-              name="imagen"
-              value={producto.imagen || ""}
-              onChange={handleChange}
-              required
-              placeholder="https://..."
-            />
-          </div>
+        {/* Verifica que el producto esté cargado antes de mostrar el formulario */}
+        {cargando ? (
+          <div>Cargando...</div>
+        ) : (
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Label htmlFor="name">Nombre:</Form.Label>
+              <Form.Control
+                id="name"
+                type="text"
+                name="name"
+                value={producto.name || ""}
+                onChange={handleChange}
+                required
+                placeholder="Ej: Camiseta"
+              />
+            </Form.Group>
 
-          <div className="form-group">
-            <label htmlFor="price">Precio:</label>
-            <input
-              id="price"
-              type="number"
-              name="price"
-              value={producto.price || ""}
-              onChange={handleChange}
-              required
-              min="0"
-              placeholder="Ej: 199.99"
-            />
-          </div>
+            <Form.Group className="mb-3">
+              <Form.Label htmlFor="imagen">URL de la Imagen:</Form.Label>
+              <Form.Control
+                id="imagen"
+                type="text"
+                name="imagen"
+                value={producto.imagen || ""}
+                onChange={handleChange}
+                required
+                placeholder="https://..."
+              />
+            </Form.Group>
 
-          <div className="form-group">
-            <label htmlFor="description">Descripción:</label>
-            <textarea
-              id="description"
-              name="description"
-              value={producto.description || ""}
-              onChange={handleChange}
-              required
-              placeholder="Describe el producto"
-            />
-          </div>
-          {/* Contenedor de botones */}
-          <div className="button-container">
-            <button type="submit" disabled={cargando}>
-              {cargando ? "Cargando..." : "Actualizar Producto"}
-            </button>
-            <button
-              className="volver-btn"
-              onClick={() => navegar("/")} // Navega hacia productos
-            >
-              🔙 Volver a Productos
-            </button>
-          </div>
-        </form>
-      )}
-    </div>
+            <Form.Group className="mb-3">
+              <Form.Label htmlFor="price">Precio:</Form.Label>
+              <Form.Control
+                id="price"
+                type="number"
+                name="price"
+                value={producto.price || ""}
+                onChange={handleChange}
+                required
+                min="0"
+                placeholder="Ej: 199.99"
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label htmlFor="description">Descripción:</Form.Label>
+              <Form.Control
+                id="description"
+                as="textarea"
+                name="description"
+                value={producto.description || ""}
+                onChange={handleChange}
+                required
+                placeholder="Describe el producto"
+                rows={3}
+              />
+            </Form.Group>
+
+            {/* Botones de acción */}
+            <div className="d-flex justify-content-between flex-column flex-sm-row gap-3">
+              <Button
+                type="submit"
+                variant="success"
+                disabled={cargando}
+                className="btn-submit w-100"
+              >
+                {cargando ? "Cargando..." : "Actualizar Producto"}
+              </Button>
+            </div>
+          </Form>
+        )}
+      </Card>
+    </Container>
   );
 }
 
