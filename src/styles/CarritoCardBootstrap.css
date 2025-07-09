@@ -1,0 +1,82 @@
+.carrito-card {
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.carrito-card-imagen {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.carrito-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.carrito-card-titulo {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.carrito-card-precio {
+  font-size: 1.1rem;
+  color: #4a8e4b;
+}
+
+.carrito-card-contador {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  color: #666;
+}
+
+.btn-eliminar {
+  background-color: transparent;
+  color: #dc3545;
+  border: none;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
+.btn-eliminar:hover {
+  color: #c82333;
+}
+
+@media (max-width: 576px) {
+  .carrito-card {
+    margin: 0.5rem 0;
+  }
+
+  .carrito-card-body {
+    padding: 1rem;
+  }
+
+  .carrito-card-imagen {
+    max-width: 80%;
+    height: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .carrito-card {
+    flex-direction: row;
+  }
+
+  .carrito-card-body {
+    flex: 1;
+    padding: 1rem 2rem;
+  }
+
+  .carrito-card-imagen {
+    max-width: 90%;
+    height: auto;
+  }
+}

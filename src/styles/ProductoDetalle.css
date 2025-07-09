@@ -1,54 +1,141 @@
 .detalle-container {
   display: flex;
-  gap: 30px;
-  padding: 20px;
-  background-color: #fdf5e6;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  margin: 20px auto;
-  max-width: 800px;
-  align-items: center;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.detalle-imagen-container {
+  display: flex;
+  justify-content: center;
 }
 
 .detalle-imagen {
-  width: 300px;
+  max-width: 100%;
   height: auto;
   border-radius: 10px;
   object-fit: cover;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .detalle-info {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  color: black;
+  gap: 1rem;
+}
+
+.detalle-titulo {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.detalle-descripcion {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.detalle-precio {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.detalle-precio span {
+  color: #4a8e4b;
+  margin-left: 0.5rem;
 }
 
 .detalle-contador {
   display: flex;
   align-items: center;
-  gap: 10px;
-  color: black;
+  gap: 1rem;
 }
 
-.detalle-contador span {
-  font-size: 18px;
-  color: black;
+.detalle-contador button {
+  background-color: #4a8e4b;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.detalle-contador button:hover {
+  background-color: #3b713b;
+}
+
+.detalle-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-top: 1rem;
 }
 
 .btn-volver {
-  margin-top: 20px;
-  padding: 10px 16px;
-  background-color: #ddd;
-  color: #333;
+  align-self: flex-start;
+  background-color: #4a8e4b;
+  color: white;
   border: none;
+  padding: 0.4rem 1rem;
   border-radius: 5px;
-  font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-weight: bold;
 }
 
 .btn-volver:hover {
-  background-color: #bbb;
+  background-color: #3b713b;
+}
+
+.btn-agregar,
+.btn-editar,
+.btn-eliminar {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-agregar {
+  background-color: #4a8e4b;
+  color: white;
+}
+
+.btn-editar {
+  background-color: #ff8c00;
+  color: white;
+}
+
+.btn-eliminar {
+  background-color: #c62828;
+  color: white;
+}
+
+.btn-agregar:hover {
+  background-color: #3b713b;
+}
+
+.btn-editar:hover {
+  background-color: #e57c00;
+}
+
+.btn-eliminar:hover {
+  background-color: #a32020;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .detalle-container {
+    flex-direction: row;
+    gap: 2rem;
+  }
+
+  .detalle-imagen-container,
+  .detalle-info {
+    flex: 1;
+  }
 }

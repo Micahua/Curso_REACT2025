@@ -1,0 +1,42 @@
+.carrito-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 2rem 1rem;
+  background-color: #fefefe;
+  border-radius: 8px;
+}
+
+.carrito-titulo {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.btn-vaciar {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-vaciar:hover {
+  background-color: #c82333;
+}
+
+.carrito-vacio {
+  font-size: 1.2rem;
+  color: #666;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.carrito-total {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #222;
+  margin-top: 2rem;
+}
+
+.total-dinero {
+  color: #4a8e4b;
+}

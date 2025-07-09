@@ -89,117 +89,56 @@ function ProductoDetalleFirebase({}) {
 
   return (
     <div className="detalle-container">
-      <img
-        className="detalle-imagen"
-        src={productoEncontrado.imagen}
-        alt={productoEncontrado.name}
-      />
+      {/* Imagen del producto */}
+      <div className="detalle-imagen-container">
+        <img
+          className="detalle-imagen"
+          src={productoEncontrado.imagen}
+          alt={productoEncontrado.name}
+        />
+      </div>
 
-      {/* Botón Volver */}
-      <button
-        className="btn btn-sm mb-3"
-        onClick={() => navegar(-1)}
-        style={{
-          backgroundColor: "#4A8E4B" /* Verde sobrio, en armonía */,
-          color: "white",
-          borderColor: "#6F4F1F",
-        }}
-      >
-        🔙 Volver
-      </button>
-
+      {/* Info del producto */}
       <div className="detalle-info">
-        <h2>{productoEncontrado.name}</h2>
-        <p>{productoEncontrado.description}</p>
+        {/* Botón Volver */}
+        <button className="btn-volver" onClick={() => navegar(-1)}>
+          🔙 Volver
+        </button>
 
-        <p>
-          <span
-            style={{ fontWeight: "bold", fontSize: "1.25rem", color: "black" }}
-          >
-            Precio:
-            <span
-              style={{
-                fontWeight: "bold",
-                fontSize: "1.25rem",
-                color: "black",
-              }}
-            >
-              {new Intl.NumberFormat("es-AR", {
-                style: "currency",
-                currency: "ARS",
-              }).format(productoEncontrado.price)}
-            </span>
+        <h2 className="detalle-titulo">{productoEncontrado.name}</h2>
+        <p className="detalle-descripcion">{productoEncontrado.description}</p>
+
+        <p className="detalle-precio">
+          Precio:
+          <span>
+            {new Intl.NumberFormat("es-AR", {
+              style: "currency",
+              currency: "ARS",
+            }).format(productoEncontrado.price)}
           </span>
         </p>
 
-        {/* Contador de cantidad */}
-        <div className="detalle-contador mb-3">
-          <button
-            onClick={restarContador}
-            className="btn btn-sm"
-            style={{
-              backgroundColor: "#4A8E4B" /* Verde sobrio, en armonía */,
-              color: "white",
-              borderColor: "#FF8C00",
-            }}
-          >
-            -
-          </button>
-          <span className="mx-3">{cantidad}</span>
-          <button
-            onClick={sumarContador}
-            className="btn btn-sm"
-            style={{
-              backgroundColor: "#4A8E4B" /* Verde sobrio, en armonía */,
-              color: "white",
-              borderColor: "#FF8C00",
-            }}
-          >
-            +
-          </button>
+        {/* Contador */}
+        <div className="detalle-contador">
+          <button onClick={restarContador}>−</button>
+          <span>{cantidad}</span>
+          <button onClick={sumarContador}>+</button>
         </div>
 
-        {/* Contenedor para los botones de acción */}
-        <div className="d-flex justify-content-between align-items-center">
-          {/* Botón Agregar al carrito o Editar producto */}
+        {/* Acciones */}
+        <div className="detalle-acciones">
           {admin ? (
-            <Link to={"/admin/editarProducto/" + id}>
-              <button
-                className="btn"
-                style={{
-                  backgroundColor: "#4A8E4B" /* Verde sobrio, en armonía */,
-                  color: "white",
-                  borderColor: "#D85E1E",
-                }}
-              >
-                Editar producto
-              </button>
+            <Link to={`/admin/editarProducto/${id}`}>
+              <button className="btn-editar">Editar producto</button>
             </Link>
           ) : (
-            <button
-              onClick={funcionCarrito}
-              className="btn"
-              style={{
-                backgroundColor: "#3E2723", // Marrón oscuro
-                color: "white",
-                borderColor: "#D85E1E",
-              }}
-            >
+            <button onClick={funcionCarrito} className="btn-agregar">
               Agregar al carrito
             </button>
           )}
 
-          {/* Botón Eliminar producto (solo si es admin) */}
           {admin && (
-            <button
-              onClick={dispararEliminar}
-              className="btn"
-              style={{
-                backgroundColor: "#3E2723", // Marrón oscuro
-                color: "white",
-                borderColor: "#3E2723",
-              }}
-            >
+            <button onClick={dispararEliminar} className="btn-eliminar">
               Eliminar Producto
             </button>
           )}
