@@ -30,11 +30,11 @@ function CarritoBootstrap() {
 
   return (
     <Container className="carrito-container">
-      <Row className="mb-4">
-        <Col>
+      <Row className="mb-4 align-items-center">
+        <Col xs={12} md={8}>
           <h2 className="carrito-titulo">🛒 Carrito de compras</h2>
         </Col>
-        <Col xs="auto">
+        <Col xs={12} md={4} className="text-md-end text-start mt-2 mt-md-0">
           {productosCarrito.length > 0 && (
             <Button
               variant="danger"
@@ -56,7 +56,7 @@ function CarritoBootstrap() {
           />
         ))
       ) : (
-        <p className="carrito-vacio">El carrito está vacío.</p>
+        <p className="carrito-vacio text-center">El carrito está vacío.</p>
       )}
 
       {total > 0 && (

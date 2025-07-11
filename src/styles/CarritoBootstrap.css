@@ -40,3 +40,23 @@
 .total-dinero {
   color: #4a8e4b;
 }
+
+@media (max-width: 576px) {
+  .carrito-container {
+    padding: 0.5rem;
+  }
+
+  .carrito-titulo {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .btn-vaciar {
+    width: 100%;
+  }
+
+  .carrito-total {
+    text-align: center !important;
+    margin-top: 1rem;
+  }
+}
